@@ -1,7 +1,7 @@
 # NNM
 a **N**eural **N**etwork **M**apping toolkit for **Max for Live**.
 
-(or is it a **N** to **N** **M**apping using **N**eural **N**etwork **M**odel & **N**earest **N**eighbor **M**atching ?)
+(or is it a **N** to **N** **M**apping toolkit using **N**eural **N**etwork **M**odel & **N**earest **N**eighbor **M**atching ?)
 
 ## Requirements : 
 
