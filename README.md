@@ -13,7 +13,7 @@ a **N**eural **N**etwork **M**apping toolkit for **Max for Live**.
 
 
 ## Installation : 
-Copy the NNM folder at the root of your Ableton/User Library folder
+Copy the NNM folder to the root of your Ableton/User Library folder
 Default path : 
 Mac : ~/Music/Ableton/User Library/NNM 
 Windows : ~/Documents/Ableton/User Library/NNM 
