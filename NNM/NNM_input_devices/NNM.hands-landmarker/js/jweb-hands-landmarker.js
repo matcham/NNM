@@ -1,18 +1,19 @@
 // IIFE for top level await
 (async () => { 
-const vision = await import("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/vision_bundle.js"); 
-const { FaceLandmarker, FilesetResolver, DrawingUtils } = vision;
+const vision = await import("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/vision_bundle.js"); 
+const { HandLandmarker, FilesetResolver, DrawingUtils } = vision;
 
 const video = document.getElementById('videoel');
 const image = document.getElementById('imageel');
 const overlay = document.getElementById('overlay');
 const canvas = overlay.getContext('2d');
 
-let faceLandmarker;
+let handLandmarker;
 let camera;
 
 let drawImage = true;
-let drawFace = true;
+let drawHands = true;
+let flipHands = true;
 let runningMode = "VIDEO";
 
 function outputMax(mess) {
@@ -24,7 +25,7 @@ function outputMaxDict(dstr) {
 }
 
 function setMaxDict(d) {
-  window.max.setDict('face_landmarkdict', d);
+  window.max.setDict('hands_landmarkdict', d);
 }
 
 window.max.bindInlet('draw_image', async function (enable) {
@@ -34,8 +35,8 @@ window.max.bindInlet('draw_image', async function (enable) {
   }
 });
 
-window.max.bindInlet('draw_face', async function (enable) {
-  drawFace = enable;
+window.max.bindInlet('draw_hands', async function (enable) {
+  drawHands = enable;
   if(runningMode === "IMAGE") {
     await detectImage();
   }
@@ -44,6 +45,15 @@ window.max.bindInlet('draw_face', async function (enable) {
 window.max.bindInlet('set_image', async function (imageFile) {
   await setRunningMode("IMAGE");
   image.src = imageFile;
+});
+
+window.max.bindInlet('flip_image', async function (flip) {
+  const factor = flip ? "1" : "-1";
+  overlay.style.transform = "scaleX(" + factor + ")";
+});
+
+window.max.bindInlet('flip_hands', function (flip) {
+  flipHands = flip;
 });
 
 window.max.bindInlet('set_mediadevice', async function (deviceLabel) {
@@ -98,9 +108,9 @@ const startVideo = () => {
         let nowInMs = Date.now();
         if (lastVideoTime !== video.currentTime) {
           lastVideoTime = video.currentTime;
-          results = faceLandmarker.detectForVideo(video, nowInMs);
+          results = handLandmarker.detectForVideo(video, nowInMs);
           results.image = video;
-          onResultsFace(results);
+          onResultsHands(results);
         }
       }
     },
@@ -127,11 +137,11 @@ const setRunningMode = async (running_mode) => {
     case "IMAGE":
       stopBothVideoAndAudio();
       runningMode = running_mode; 
-      await faceLandmarker.setOptions({ runningMode: running_mode }); 
+      await handLandmarker.setOptions({ runningMode: running_mode }); 
       return
     case "VIDEO":
       runningMode = running_mode; 
-      await faceLandmarker.setOptions({ runningMode: running_mode }); 
+      await handLandmarker.setOptions({ runningMode: running_mode }); 
       startVideo();
       return      
     default:
@@ -140,9 +150,9 @@ const setRunningMode = async (running_mode) => {
 };
 
 const detectImage = async () => {
-  let results = faceLandmarker.detect(image); 
+  let results = handLandmarker.detect(image); 
   results.image = image;
-  onResultsFace(results);
+  onResultsHands(results);
 };
 
 image.onload = detectImage;
@@ -151,7 +161,7 @@ let lastVideoTime = -1;
 let results = undefined;
 const drawingUtils = new DrawingUtils(canvas);
 
-function onResultsFace(results) {
+function onResultsHands(results) {
 
   canvas.save();
   canvas.clearRect(0, 0, overlay.width, overlay.height);
@@ -162,85 +172,54 @@ function onResultsFace(results) {
 
   const output = {};
 
-  if (results.faceLandmarks) {
-    for (const landmarks of results.faceLandmarks) {
-      if (drawFace) {
-        drawingUtils.drawConnectors(
-          landmarks,
-          FaceLandmarker.FACE_LANDMARKS_TESSELATION,
-          { color: "#C0C0C070", lineWidth: 1 }
-        );
-        drawingUtils.drawConnectors(
-          landmarks,
-          FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE,
-          { color: "#FF3030", lineWidth: 1 }
-        );
-        drawingUtils.drawConnectors(
-          landmarks,
-          FaceLandmarker.FACE_LANDMARKS_RIGHT_EYEBROW,
-          { color: "#FF3030", lineWidth: 1 }
-        );
-        drawingUtils.drawConnectors(
-          landmarks,
-          FaceLandmarker.FACE_LANDMARKS_LEFT_EYE,
-          { color: "#30FF30", lineWidth: 1 }
-        );
-        drawingUtils.drawConnectors(
-          landmarks,
-          FaceLandmarker.FACE_LANDMARKS_LEFT_EYEBROW,
-          { color: "#30FF30", lineWidth: 1 }
-        );
-        drawingUtils.drawConnectors(
-          landmarks,
-          FaceLandmarker.FACE_LANDMARKS_FACE_OVAL,
-          { color: "#E0E0E0", lineWidth: 1 }
-        );
-        drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_LIPS, {
-          color: "#E0E0E0", lineWidth: 1
-        });
-        drawingUtils.drawConnectors(
-          landmarks,
-          FaceLandmarker.FACE_LANDMARKS_RIGHT_IRIS,
-          { color: "#FF3030", lineWidth: 1 }
-        );
-        drawingUtils.drawConnectors(
-          landmarks,
-          FaceLandmarker.FACE_LANDMARKS_LEFT_IRIS,
-          { color: "#30FF30", lineWidth: 1 }
-        );
-      }
+  if (results.handednesses) {
+    for (const hand of results.handednesses) {
+      Object.values(HAND_LANDMARKS).forEach(([landmark, index]) => { 
+        try {
+          const handIndex = results.handednesses.length > 1 ? Number(hand[0].index) : 0;
+          const handName = flipHands ? hand[0].categoryName === "Right" ? "Left" : "Right" : hand[0].categoryName;
+          output[handName] = output[handName] || {};
+          output[handName][landmark] = results.landmarks[handIndex][index];
+        } catch (e) {
+          console.error(e);
+        }
+      });
     }
   }
 
-  if (results.faceBlendshapes) {
-    let face_index = 0;
-    for (const face of results.faceBlendshapes) {
-      const faceid = `face_${face_index}`;
-      output[faceid] = {};
-      output[faceid]["headIndex"] = face.headIndex;
-      for (const shape of face.categories) {
-        output[faceid][shape.categoryName] = shape.score;
+  if (results.landmarks) {
+    for (const landmarks of results.landmarks) {
+      if(drawHands) {
+        drawingUtils.drawConnectors(landmarks, HandLandmarker.HAND_CONNECTIONS, {
+          color: "#00FF00",
+          lineWidth: 1
+        });
+        drawingUtils.drawLandmarks(landmarks, { 
+          color: "#FF0000", 
+          fillColor: '#FF0000',
+          lineWidth: (data) => 1 + data.from.z * -2,
+          radius: (data) => {
+            return DrawingUtils.lerp(data.from.z, -0.15, .1, 2, 1);
+          }
+        });
       }
-      face_index++;
-    } 
+    }
   }
-
   setMaxDict(output);
   outputMax("update");
   canvas.restore();
 }
 
 const filesetResolver = await FilesetResolver.forVisionTasks(
-  "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision/wasm"
+  "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm"
 );
-faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
+handLandmarker = await HandLandmarker.createFromOptions(filesetResolver, {
   baseOptions: {
-    modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
+    modelAssetPath: `https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task`,
     delegate: "GPU"
   },
-  outputFaceBlendshapes: true,
-  runningMode,
-  numFaces: 2
+  runningMode: runningMode,
+  numHands: 2
 });
 
 getVideoDevicesForMax();
