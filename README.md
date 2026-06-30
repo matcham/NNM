@@ -18,3 +18,7 @@ Default path :
 Mac : ~/Music/Ableton/User Library/NNM  
 Windows : ~/Documents/Ableton/User Library/NNM   
 *(rename NNM-main to NNM if needed - f.e if you downloaded NNM-main.zip file from github)*
+
+
+## Documentation :  
+https://github.com/matcham/NNM/wiki
