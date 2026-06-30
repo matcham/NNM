@@ -6,8 +6,10 @@
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
 {\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
 {\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}
-{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}}
-{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}
+{\list\listtemplateid5\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid401\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid5}
+{\list\listtemplateid6\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid501\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid6}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}{\listoverride\listid5\listoverridecount0\ls5}{\listoverride\listid6\listoverridecount0\ls6}}
 \paperw11900\paperh16840\margl1440\margr1440\vieww17940\viewh12800\viewkind0
 \deftab560
 \pard\pardeftab560\pardirnatural\partightenfactor0
@@ -48,7 +50,7 @@ Max 8.6.5 or higher (Mac/Windows).  \
 \pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\li720\fi-720\pardirnatural\partightenfactor0
 \ls4\ilvl0
 \f3\b \cf0 {\listtext	\uc0\u8226 	}Data Knot
-\f2\b0  package by Rodrigo Constanzo {\field{\*\fldinst{HYPERLINK "https://github.com/rconstanzo/data-knot"}}{\fldrslt https://github.com/rconstanzo/data-knot}} is used in some examples (dk.mfcc, dk.fourses, \'85)\
+\f2\b0  package by Rodrigo Constanzo {\field{\*\fldinst{HYPERLINK "https://github.com/rconstanzo/data-knot"}}{\fldrslt https://github.com/rconstanzo/data-knot}} (available in Max package Manager) is used in some examples (dk.mfcc, dk.fourses, \'85)\
 {\listtext	\uc0\u8226 	}Ultraleap package and Leap Motion driver required for Leap Motion examples.\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
 \cf0 \
@@ -72,14 +74,115 @@ The core devices : \
 \
 \
 \
-NNM_input_devices\
+
+\f3\b Send and receive lists between devices
+\f2\b0 \
+Input devices send lists of parameters (can be any length) to NNM-mapper using Max send / receive.\
+Each Input devices has a default send name, that can be changed to anything.\
+\
+One special case : when a send / receive name contains \'ab\'a0track#\'a0\'bb : \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+\cf0 track# is replaced by current track # (starts from 1)\
+So input devices and NNM-mappers can be grouped and saved as instrument / effect Rack presets, and then placed or duplicated to other tracks, preserving send / receive associations.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+
+\f3\b\fs28 \cf0 NNM_input_devices
+\f2\b0\fs24 \
+All these devices are Max Audio Effects, so they can be used in any track (Audio or MIDI)\
+(1 exception : NNM.LeapMotion.makeNote = Max MIDI Effect)\
+\
+\
+
+\f3\b NNM.LeapMotion.device.amxd
+\f2\b0  (Max Audio Effect)\
+Connect to a Leap Motion controller, and sends tracking data to other devices.\
+Individual parameters are sent to :\
+left/tracking left/x left/y left/z left/yaw left/pitch left/roll left/velocity left/acceleration left/pinch left/grab right/tracking right/x right/y right/z right/yaw right/pitch right/roll right/velocity right/acceleration right/pinch right/grab\
+\
++ lists describing the whole hand in 3D : \
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\li720\fi-720\pardirnatural\partightenfactor0
+\ls5\ilvl0\cf0 {\listtext	\uc0\u8259 	}Hand descriptor : fingers tips position (x y z) + direction (x y z) * 5 fingers \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+\cf0 	= 30 parameters (range [-1 - 1.])\
+	Sent to left_hand_descriptor & right_hand_descriptor (These default send names can be changed)\
+\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\li720\fi-720\pardirnatural\partightenfactor0
+\ls6\ilvl0\cf0 {\listtext	\uc0\u8259 	}Hand Gesture : position of 5 fingers tips (x y z) relative to hand palm\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+\cf0 	=15 parameters (range [-1 - 1.])\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+\cf0 	Sent to left_hand_gesture & right_hand_gesture (These default send names can be changed)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+\cf0 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+
+\f3\b \cf0 NNM.LeapMotion.simpleMapper.amxd 
+\f2\b0 (Max Audio Effect)\
+Receive a parameter from NNM.LeapMotion.device and takes control of any parameter in Live\
+\
+
+\f3\b NNM.LeapMotion.multiMapper.amxd 
+\f2\b0 (Max Audio Effect)\
+= 8 NNM.LeapMotion.simpleMapper in a floating window\
+\
+
+\f3\b NNM.LeapMotion.makeNote.amxd
+\f2\b0  (Max MIDI Effect)\
+Generates a MIDI note when the selected parameter (coming from NNM.LeapMotion.device) crosses a threshold.\
+\
+NNM.MIDI-stats.amxd\
+\
+NNM.multiXY.amxd\
+\
+NNM.XY.amxd\
+\
+NNM.face-landmarker.amxd\
+\
+NNM.hands-landmarker.amxd\
+\
+NNM.pose-landmarker.amxd\
+\
+NNM.dk.mfcc.amxd\
+Analyzes audio input for MFCCs based on audio onsets.\
+and sends 13 mfcc coefficients (skipping the 0th coefficient) to \'ab\'a0track#_mfcc\'a0\'bb \
+\
+\
+O-S-C_session-loader.amxd\
+A utility to ease loading Open Stage Control session files.\
+The selected session file (.json) can be automatically sent to the connected clients when the Live set is loaded.\
 \
 \
 \
 NNM_output_devices\
+NNM_Fourses.amxd & NNM_LCG.amxd are Max Instruments ; they need to receive (any) MIDI note to play.\
+(Pitch and velocity do not affect the sound, MIDI notes are just used as a trigger)\
 \
 \
+About the Demo Live Sets :\
+Face-landmarker - Meld.als\
+Hands-landmarker - Fourses.als\
+Require an internet connection (jweb-MediaPipe must uses some online resources)\
+\
+LeapMotion examples : \
+Require a leapmotion device (obviously!) - with its up-to-date drivers installed.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://www.ultraleap.com/downloads/"}}{\fldrslt \cf0 https://www.ultraleap.com/downloads/}}\
+\
+multiXY - *.als\
+The NNM.multiXY can be controlled with the mouse (but it\'92s no fun !)\
+Using Open Stage Control {\field{\*\fldinst{HYPERLINK "https://openstagecontrol.ammd.net/"}}{\fldrslt https://openstagecontrol.ammd.net}} on any multitouch screen / phone / tablet is recommended.\
+(Load the session O-S-C_multiXY_(sorted).json located in NNM_input_devices folder)\
+Alternatively, these multiXY examples can also receive multitouch data from the Mac trackpad using Tongseng : {\field{\*\fldinst{HYPERLINK "https://github.com/fajran/tongseng"}}{\fldrslt https://github.com/fajran/tongseng}}\
+ Or : Lemur or TouchOSC should be easily configured to send the proper data (/multixy x1 x2 x3 x4 x5 y1 y2 y3 y4 y5 ) \
+\
+dk.mfcc - Resonators.als\
+Requires 
+\f3\b Data Knot
+\f2\b0  package by Rodrigo Constanzo {\field{\*\fldinst{HYPERLINK "https://github.com/rconstanzo/data-knot"}}{\fldrslt https://github.com/rconstanzo/data-knot}} \
 \
 \
-\
-Devices description\'85}
+}
