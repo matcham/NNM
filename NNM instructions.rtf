@@ -1,6 +1,6 @@
 {\rtf1\ansi\ansicpg1252\cocoartf2870
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue-Bold;\f1\fnil\fcharset0 HelveticaNeue;\f2\fswiss\fcharset0 Helvetica;
-\f3\fswiss\fcharset0 Helvetica-Bold;}
+\f3\fswiss\fcharset0 Helvetica-Bold;\f4\fswiss\fcharset0 Helvetica-Oblique;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
@@ -10,7 +10,7 @@
 {\list\listtemplateid5\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid401\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid5}
 {\list\listtemplateid6\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid501\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid6}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}{\listoverride\listid5\listoverridecount0\ls5}{\listoverride\listid6\listoverridecount0\ls6}}
-\paperw11900\paperh16840\margl1440\margr1440\vieww17940\viewh12800\viewkind0
+\paperw11900\paperh16840\margl1440\margr1440\vieww17940\viewh16780\viewkind0
 \deftab560
 \pard\pardeftab560\pardirnatural\partightenfactor0
 
@@ -27,12 +27,9 @@
 \
 Mathieu Chamagne
 \f0\b\fs40 \
-\pard\pardeftab560\slleading20\partightenfactor0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
 
 \f2\b0\fs24 \cf0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
-\cf0 ## Requirements\
-Max 8.6.5 or higher (Mac/Windows).  \
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
 \cf0 \ul \ulc0 Requirements : \
@@ -65,11 +62,15 @@ Windows : ~/Documents/Ableton/User Library/NNM \
 \
 \
 The core devices : \
-\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
 
 \f3\b \cf0 NNM-mapper.amxd
 \f2\b0 \
+Receives list of parameters from input devices (using Max send/receive) or from OSC, and controls the parameters of any other target device in the Live set.\
+Different mapping algorithms are available:\
+- Regression with a Multi-Layer Perceptron\
+- Regression with K-Nearest Neighbours\
+- Inverse Distance Weighted Interpolation\
 \
 \
 \
@@ -88,18 +89,21 @@ So input devices and NNM-mappers can be grouped and saved as instrument / effect
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
 \cf0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
-
-\f3\b\fs28 \cf0 NNM_input_devices
-\f2\b0\fs24 \
+\cf0 \ul \ulc0 NNM_input_devices\ulnone \
 All these devices are Max Audio Effects, so they can be used in any track (Audio or MIDI)\
 (1 exception : NNM.LeapMotion.makeNote = Max MIDI Effect)\
 \
 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
 
-\f3\b NNM.LeapMotion.device.amxd
+\f3\b \cf0 NNM.LeapMotion.device.amxd
 \f2\b0  (Max Audio Effect)\
 Connect to a Leap Motion controller, and sends tracking data to other devices.\
-Individual parameters are sent to :\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+\cf0 Require a Leap Motion device (obviously!) - with its up-to-date drivers installed. {\field{\*\fldinst{HYPERLINK "https://www.ultraleap.com/downloads/"}}{\fldrslt https://www.ultraleap.com/downloads/}}\
++ Ultraleap package installed from Max Package Manager\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+\cf0 Individual parameters are sent to :\
 left/tracking left/x left/y left/z left/yaw left/pitch left/roll left/velocity left/acceleration left/pinch left/grab right/tracking right/x right/y right/z right/yaw right/pitch right/roll right/velocity right/acceleration right/pinch right/grab\
 \
 + lists describing the whole hand in 3D : \
@@ -134,55 +138,92 @@ Receive a parameter from NNM.LeapMotion.device and takes control of any paramete
 \f2\b0  (Max MIDI Effect)\
 Generates a MIDI note when the selected parameter (coming from NNM.LeapMotion.device) crosses a threshold.\
 \
-NNM.MIDI-stats.amxd\
+
+\f3\b NNM.MIDI-stats.amxd
+\f2\b0 \
+Analyzes incoming MIDI notes and generates statistics returned as lists.\
 \
-NNM.multiXY.amxd\
+
+\f3\b NNM.multiXY.amxd
+\f2\b0 \
+A mutiXY UI : 5 independant points in 2D - can be controlled with the mouse (but it\'92s no fun !)\
+Receives OSC from /multixy\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+\cf0 Using Open Stage Control {\field{\*\fldinst{HYPERLINK "https://openstagecontrol.ammd.net/"}}{\fldrslt https://openstagecontrol.ammd.net}} on any multitouch screen / phone / tablet is recommended.\
+(Load the session O-S-C_multiXY_(sorted).json located in NNM_input_devices folder)\
+Alternatively, these multiXY examples can also receive multitouch data from the Mac trackpad using Tongseng : {\field{\*\fldinst{HYPERLINK "https://github.com/fajran/tongseng"}}{\fldrslt https://github.com/fajran/tongseng}}\
+ Or : Lemur or TouchOSC should be easily configured to send the proper data (/multixy x1 x2 x3 x4 x5 y1 y2 y3 y4 y5 ) \
+Returns a list in the form x1 x2 x3 x4 x5 y1 y2 y3 y4 y5\
+\'ab\'a0Sort X & Y\'a0\'bb button : sort x & y in ascending order\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+
+\f3\b \cf0 NNM.XY.amxd\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+
+\f2\b0 \cf0 Just a 2D controller that sends a list of 2 elements : x y\
 \
-NNM.XY.amxd\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+
+\f3\b \cf0 NNM.face-landmarker.amxd 
+\f4\i\b0 (Require an internet connection, as jweb-MediaPipe needs online resources when initializing) 
+\f3\i0\b \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+
+\f2\b0 \cf0 use MediaPipe FaceLandmarker with Max's `jweb` connected to either a live webcamera stream or using still images.\
+Provides 51 features per face, which are grouped into a list, send as \'91face-landmarker\'92\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+
+\f3\b \cf0 NNM.hands-landmarker.amxd 
+\f4\i\b0 (Require an internet connection, as jweb-MediaPipe needs online resources when initializing) 
+\f2\i0 \
+Use MediaPipe HandLandmarker with Max's `jweb` connected to either a live webcamera stream or using still images.\
+The hand landmark model bundle detects the keypoint localization of 21 hand-knuckle coordinates within the detected hand regions. The model was trained on approximately 30K real-world images, as well as several rendered synthetic hand models imposed over various backgrounds.\
+Returns 2 lists (1 per hand) of 40 elements (x y of 20 hand-knuckle coordinates) :\
+left-hand-landmarker + right-hand-landmarker\
 \
-NNM.face-landmarker.amxd\
+
+\f3\b NNM.pose-landmarker.amxd 
+\f4\i\b0 (Require an internet connection, as jweb-MediaPipe needs online resources when initializing) 
+\f2\i0 \
+use Mediapipe Pose Landmarker with Max's `jweb`\
+The pose landmarker model tracks 33 body landmark locations (x y), grouped in a list of 66 elements sent as \'92pose-landmarker\'92\
 \
-NNM.hands-landmarker.amxd\
-\
-NNM.pose-landmarker.amxd\
-\
-NNM.dk.mfcc.amxd\
+
+\f3\b NNM.dk.mfcc.amxd
+\f2\b0 \
 Analyzes audio input for MFCCs based on audio onsets.\
 and sends 13 mfcc coefficients (skipping the 0th coefficient) to \'ab\'a0track#_mfcc\'a0\'bb \
-\
-\
-O-S-C_session-loader.amxd\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+\cf0 Requires 
+\f3\b Data Knot
+\f2\b0  package by Rodrigo Constanzo {\field{\*\fldinst{HYPERLINK "https://github.com/rconstanzo/data-knot"}}{\fldrslt https://github.com/rconstanzo/data-knot}} \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
+
+\f3\b \cf0 O-S-C_session-loader.amxd
+\f2\b0 \
 A utility to ease loading Open Stage Control session files.\
 The selected session file (.json) can be automatically sent to the connected clients when the Live set is loaded.\
 \
 \
 \
-NNM_output_devices\
+
+\f3\b \ul NNM_output_devices
+\f2\b0 \ulnone \
 NNM_Fourses.amxd & NNM_LCG.amxd are Max Instruments ; they need to receive (any) MIDI note to play.\
 (Pitch and velocity do not affect the sound, MIDI notes are just used as a trigger)\
 \
 \
-About the Demo Live Sets :\
-Face-landmarker - Meld.als\
-Hands-landmarker - Fourses.als\
-Require an internet connection (jweb-MediaPipe must uses some online resources)\
 \
-LeapMotion examples : \
-Require a leapmotion device (obviously!) - with its up-to-date drivers installed.\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab560\pardirnatural\partightenfactor0
-{\field{\*\fldinst{HYPERLINK "https://www.ultraleap.com/downloads/"}}{\fldrslt \cf0 https://www.ultraleap.com/downloads/}}\
 \
-multiXY - *.als\
-The NNM.multiXY can be controlled with the mouse (but it\'92s no fun !)\
-Using Open Stage Control {\field{\*\fldinst{HYPERLINK "https://openstagecontrol.ammd.net/"}}{\fldrslt https://openstagecontrol.ammd.net}} on any multitouch screen / phone / tablet is recommended.\
-(Load the session O-S-C_multiXY_(sorted).json located in NNM_input_devices folder)\
-Alternatively, these multiXY examples can also receive multitouch data from the Mac trackpad using Tongseng : {\field{\*\fldinst{HYPERLINK "https://github.com/fajran/tongseng"}}{\fldrslt https://github.com/fajran/tongseng}}\
- Or : Lemur or TouchOSC should be easily configured to send the proper data (/multixy x1 x2 x3 x4 x5 y1 y2 y3 y4 y5 ) \
 \
-dk.mfcc - Resonators.als\
-Requires 
-\f3\b Data Knot
-\f2\b0  package by Rodrigo Constanzo {\field{\*\fldinst{HYPERLINK "https://github.com/rconstanzo/data-knot"}}{\fldrslt https://github.com/rconstanzo/data-knot}} \
 \
 \
 }
