@@ -22,3 +22,9 @@ Windows : ~/Documents/Ableton/User Library/NNM
 
 ## Documentation :  
 https://github.com/matcham/NNM/wiki
+
+## How to support my work
+Please consider offering me a beer if you like this device  
+(C) Mathieu Chamagne 2026  
+mathieu.chamagne@gmail.com  
+http://www.mathieuchamagne.com  
